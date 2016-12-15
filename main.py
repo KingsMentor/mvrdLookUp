@@ -41,9 +41,9 @@ def lookUpMVRD(self, vpn):
         trs = soup.find_all('tr')
         mvrd = {}
         if (len(trs) == 0):
-            mvrd["status"] = "not available"
+            mvrd["status_code"] = "not available"
         else:
-            mvrd["status"] = "success"
+            mvrd["status_code"] = "success"
             for tr in trs:
                 soup = BeautifulSoup("<html><head></head><body>" + str(tr) + "</body></html>", "html.parser")
                 keyValue = soup.find_all("td")
@@ -51,7 +51,7 @@ def lookUpMVRD(self, vpn):
         self.response.write(json.dumps(mvrd))
     except:
         mvrd = {}
-        mvrd["status"] = "failed. retry"
+        mvrd["status_code"] = "failed. retry"
         self.response.write(json.dumps(mvrd))
 
 
